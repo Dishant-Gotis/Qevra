@@ -17,7 +17,8 @@
         ShowInTaskbar="False"
         ShowActivated="False"
         CanResize="False"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        Icon="avares://Qevra/Assets/Icons/qevra.ico">
   <Window.Styles>
     <!-- The download badge pops up above the progress ring and pops away once the files are saved. -->
     <Style Selector="Border.download-badge">

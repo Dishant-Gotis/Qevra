@@ -21,7 +21,7 @@ public sealed class ThemeService(IPlatformServices platform)
 
     /// <summary>Accent swatches offered in the Theme page.</summary>
     public static readonly IReadOnlyList<string> Swatches =
-        ["#7F77DD", "#1D9E75", "#D85A30", "#378ADD", "#D4537E", "#BA7517", "#639922", "#5F5E5A"];
+        ["#6366F1", "#1D9E75", "#D85A30", "#378ADD", "#D4537E", "#BA7517", "#639922", "#5F5E5A"];
 
     /// <summary>Curated theme preset with coordinated light and dark accent colours.</summary>
     public sealed record ThemePreset(string Key, string LightHex, string DarkHex)
@@ -35,7 +35,7 @@ public sealed class ThemeService(IPlatformServices platform)
     public static readonly IReadOnlyList<ThemePreset> Presets =
     [
         new("monochrome", "#1F1E1D", "#F1EFE8"),
-        new("lavender", "#7F77DD", "#BCAEE5"),
+        new("lavender", "#6366F1", "#BCAEE5"),
         new("peach", "#E07A70", "#F29B91"),
         new("mint", "#529B7D", "#88D5B1"),
         new("rose", "#E86483", "#F79BB0"),

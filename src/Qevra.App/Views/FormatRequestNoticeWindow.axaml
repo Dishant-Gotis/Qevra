@@ -12,7 +12,8 @@
         Topmost="True"
         ShowInTaskbar="False"
         ShowActivated="False"
-        CanResize="False">
+        CanResize="False"
+        Icon="avares://Qevra/Assets/Icons/qevra.ico">
   <Border Classes="card" Margin="12" Padding="16,14">
     <DockPanel>
       <Image DockPanel.Dock="Left" Source="avares://Qevra/Assets/Icons/qevra.png" Width="36" Height="36"

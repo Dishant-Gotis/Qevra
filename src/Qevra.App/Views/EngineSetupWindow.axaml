@@ -5,13 +5,21 @@
         x:Class="Qevra.App.Views.EngineSetupWindow"
         x:DataType="vm:EngineSetupViewModel"
         Title="{DynamicResource setup.title}"
-        Width="560" SizeToContent="Height" CanResize="False"
+        Icon="avares://Qevra/Assets/Icons/qevra.ico"
+        Width="580" SizeToContent="Height" CanResize="False"
         WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource SurfaceBrush}">
+        Background="{DynamicResource PageBrush}">
   <!-- The engine list scrolls between the fixed header and buttons: the window is no taller than the screen (#370). -->
   <Grid RowDefinitions="Auto,*,Auto" Margin="0,24">
     <StackPanel Spacing="6" Margin="26,0,26,12">
-      <TextBlock Classes="h1" Text="{DynamicResource setup.title}" />
+      <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+        <Border Width="32" Height="32" CornerRadius="8" Background="{DynamicResource SurfaceAltBrush}"
+                BorderBrush="{DynamicResource SubtleBorderBrush}" BorderThickness="1"
+                VerticalAlignment="Center">
+          <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+        <TextBlock Classes="h1" Text="{DynamicResource setup.title}" VerticalAlignment="Center" />
+      </StackPanel>
       <TextBlock Classes="muted" TextWrapping="Wrap" Text="{DynamicResource setup.description}" />
     </StackPanel>
 
@@ -25,10 +33,12 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
           <DataTemplate x:DataType="svc:EnginePackageState">
-            <Border Classes="card" Padding="14,12">
+            <Border Classes="card" Padding="16,14" Background="{DynamicResource SurfaceBrush}"
+                    BorderBrush="{DynamicResource SubtleBorderBrush}" BorderThickness="1"
+                    CornerRadius="{DynamicResource SoftRadius}" BoxShadow="{DynamicResource CardShadow}">
               <DockPanel>
                 <!-- Already installed packages cannot be ticked; ticking is locked once installation started. -->
-                <CheckBox DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,0,10,0"
+                <CheckBox DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,0,12,0"
                           IsChecked="{Binding Selected}" IsEnabled="{Binding CanInstall}"
                           IsVisible="{Binding !IsInstalled}" />
                 <PathIcon DockPanel.Dock="Left" VerticalAlignment="Top" Margin="2,3,14,0" Width="14" Height="14"
@@ -54,7 +64,7 @@
       </ItemsControl>
     </ScrollViewer>
 
-    <StackPanel Grid.Row="2" Spacing="16" Margin="26,12,26,0">
+    <StackPanel Grid.Row="2" Spacing="16" Margin="26,16,26,0">
       <TextBlock Classes="caption" TextWrapping="Wrap" Text="{DynamicResource setup.note}" />
 
       <DockPanel>
