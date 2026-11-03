@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Qevra.Platform.MacOS</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Qevra.Core\Qevra.Core.csproj" />
+    <InternalsVisibleTo Include="Qevra.Platform.Tests" />
+  </ItemGroup>
+</Project>

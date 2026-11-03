@@ -1,0 +1,61 @@
+# Build output
+bin/
+obj/
+artifacts/
+publish/
+Releases/
+*.nupkg
+*.snupkg
+
+# Downloaded conversion engines (see build/fetch-engines.ps1)
+engines/
+build/.cache/
+
+# IDE & Editor files
+.vs/
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+*.props.user
+*.targets.user
+Directory.Build.props.user
+Directory.Build.targets.user
+
+# Python bytecode (used by build/*.py scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test results & logs
+TestResults/
+*.trx
+coverage*/
+*.log
+
+# Sensitive security / code signing keys (see build/sign-windows.ps1)
+*.pfx
+*.p12
+*.snk
+
+# Folder watcher local state records
+.qevra-watch-*.json
+
+# OS & Environment
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+._*
+*~
+.env
+.env.local
+
+# Fonts are downloaded by build/fetch-fonts.ps1
+src/Qevra.App/Assets/Fonts/*.ttf
+src/Qevra.App/Assets/Fonts/*.otf
+
+# Agent skills & local configuration
+.agents/

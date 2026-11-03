@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Qevra.Platform.Linux\Qevra.Platform.Linux.csproj" />
+    <ProjectReference Include="..\..\src\Qevra.Platform.MacOS\Qevra.Platform.MacOS.csproj" />
+    <ProjectReference Include="..\..\src\Qevra.Platform.Windows\Qevra.Platform.Windows.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <Using Include="Xunit" />
+  </ItemGroup>
+</Project>

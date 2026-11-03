@@ -1,0 +1,33 @@
+<!--
+  Qevra.Cli: the "qevra" command line. Converts files and watches folders without the tray app, with the same
+  engines, presets and settings. Published next to Qevra.exe as qevra-cli.exe (one runtime for both); the installer
+  puts a "qevra" shim on PATH (cli\qevra.cmd).
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>qevra-cli</AssemblyName>
+    <RootNamespace>Qevra.Cli</RootNamespace>
+    <ApplicationIcon>..\Qevra.App\Assets\Icons\qevra.ico</ApplicationIcon>
+    <!-- The Recycle Bin is IFileOperation, a COM interface (Qevra.Platform.Windows). -->
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qevra.Core\Qevra.Core.csproj" />
+    <ProjectReference Include="..\Qevra.Engines\Qevra.Engines.csproj" />
+    <!-- "Replace the original" moves originals to the Recycle Bin / Trash (MoveToTrash), as the app does. -->
+    <ProjectReference Include="..\Qevra.Platform.Windows\Qevra.Platform.Windows.csproj" />
+    <ProjectReference Include="..\Qevra.Platform.Linux\Qevra.Platform.Linux.csproj" />
+    <ProjectReference Include="..\Qevra.Platform.MacOS\Qevra.Platform.MacOS.csproj" />
+  </ItemGroup>
+
+  <!-- Error messages and built-in preset names, in English (the app's translation file). -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\Qevra.App\Assets\i18n\en.json" LogicalName="Qevra.Cli.en.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Qevra.Cli.Tests" />
+  </ItemGroup>
+</Project>

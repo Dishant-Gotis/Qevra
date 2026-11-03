@@ -1,0 +1,26 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Qevra.Core/Qevra.Core.csproj" />
+    <Project Path="src/Qevra.Engines/Qevra.Engines.csproj" />
+    <Project Path="src/Qevra.Platform.Windows/Qevra.Platform.Windows.csproj" />
+    <Project Path="src/Qevra.Platform.Linux/Qevra.Platform.Linux.csproj" />
+    <Project Path="src/Qevra.Platform.MacOS/Qevra.Platform.MacOS.csproj" />
+    <Project Path="src/Qevra.App/Qevra.App.csproj" />
+    <Project Path="src/Qevra.Cli/Qevra.Cli.csproj" />
+    <Project Path="src/Qevra.Setup/Qevra.Setup.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Qevra.Core.Tests/Qevra.Core.Tests.csproj" />
+    <Project Path="tests/Qevra.Engines.Tests/Qevra.Engines.Tests.csproj" />
+    <Project Path="tests/Qevra.App.Tests/Qevra.App.Tests.csproj" />
+    <Project Path="tests/Qevra.Cli.Tests/Qevra.Cli.Tests.csproj" />
+    <Project Path="tests/Qevra.Platform.Tests/Qevra.Platform.Tests.csproj" />
+    <Project Path="tests/Qevra.Setup.Tests/Qevra.Setup.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path=".editorconfig" />
+  </Folder>
+</Solution>

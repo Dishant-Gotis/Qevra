@@ -1,0 +1,40 @@
+// Version information of the Explorer context-menu DLL. build/build-explorer-menu.ps1 passes the app version as
+// QEVRA_VERSION_MAJOR/MINOR/PATCH and QEVRA_VERSION_TEXT.
+
+#include <winver.h>
+
+#ifndef QEVRA_VERSION_MAJOR
+#define QEVRA_VERSION_MAJOR 0
+#define QEVRA_VERSION_MINOR 0
+#define QEVRA_VERSION_PATCH 0
+#define QEVRA_VERSION_TEXT "0.0.0"
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION QEVRA_VERSION_MAJOR, QEVRA_VERSION_MINOR, QEVRA_VERSION_PATCH, 0
+PRODUCTVERSION QEVRA_VERSION_MAJOR, QEVRA_VERSION_MINOR, QEVRA_VERSION_PATCH, 0
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+FILEFLAGS 0
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_DLL
+FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "Qevra contributors"
+            VALUE "FileDescription", "Qevra File Explorer context menu"
+            VALUE "FileVersion", QEVRA_VERSION_TEXT
+            VALUE "InternalName", "QevraExplorerMenu"
+            VALUE "LegalCopyright", "Copyright (c) Qevra contributors. MIT License."
+            VALUE "OriginalFilename", "QevraExplorerMenu.dll"
+            VALUE "ProductName", "Qevra"
+            VALUE "ProductVersion", QEVRA_VERSION_TEXT
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1200
+    END
+END
