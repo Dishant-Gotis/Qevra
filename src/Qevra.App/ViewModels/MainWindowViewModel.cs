@@ -99,7 +99,7 @@ public sealed partial class MainWindowViewModel : ObservableObject, IDisposable
     public double NavWidth => IsNavCollapsed ? NavCollapsedWidth : NavExpandedWidth;
 
     /// <summary>Room around the navigation's content; less when collapsed, so an icon fits the rail.</summary>
-    public Thickness NavPadding => new(IsNavCollapsed ? 10 : 14, 18);
+    public Thickness NavPadding => new(IsNavCollapsed ? 8 : 14, 18);
 
     /// <summary>Tooltip and screen-reader name of the button that collapses or expands the navigation.</summary>
     public string NavToggleTip => _loc[IsNavCollapsed ? "nav.expand" : "nav.collapse"];

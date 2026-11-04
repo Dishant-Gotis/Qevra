@@ -11,7 +11,7 @@
         ShowInTaskbar="False">
   <Border Classes="card" Margin="16" Padding="20">
     <DockPanel>
-      <Image DockPanel.Dock="Left" Source="avares://Qevra/Assets/Icons/qevra.png" Width="44" Height="44"
+      <Image DockPanel.Dock="Left" Source="avares://Qevra/Assets/Icons/qevra.png" Width="60" Height="60"
              VerticalAlignment="Top" Margin="0,0,16,0" />
       <StackPanel Spacing="10">
         <StackPanel Spacing="3">

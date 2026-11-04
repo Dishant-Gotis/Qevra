@@ -62,12 +62,11 @@
             BoxShadow="{DynamicResource CardShadow}">
       <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14">
         <!-- Glowing App Icon / Conversion Orb -->
-        <Border Width="72" Height="72" CornerRadius="20" Background="{DynamicResource SurfaceAltBrush}"
+        <Border Width="92" Height="92" CornerRadius="24" Background="{DynamicResource SurfaceAltBrush}"
                 BorderBrush="{DynamicResource AccentSoftBrush}" BorderThickness="1.5"
-                BoxShadow="0 4 16 0 #20000000" HorizontalAlignment="Center">
+                BoxShadow="0 6 24 0 #30000000" HorizontalAlignment="Center">
           <Grid>
-            <PathIcon Width="30" Height="30" Data="{StaticResource Icon.Upload}" Foreground="{DynamicResource AccentBrush}"
-                      HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="62" Height="62" HorizontalAlignment="Center" VerticalAlignment="Center" />
           </Grid>
         </Border>
         <TextBlock Classes="h1" FontSize="21" FontWeight="Bold" HorizontalAlignment="Center" Text="{DynamicResource home.drop_title}" />

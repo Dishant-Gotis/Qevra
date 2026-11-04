@@ -16,7 +16,7 @@
         Icon="avares://Qevra/Assets/Icons/qevra.ico">
   <Border Classes="card" Margin="12" Padding="16,14">
     <DockPanel>
-      <Image DockPanel.Dock="Left" Source="avares://Qevra/Assets/Icons/qevra.png" Width="36" Height="36"
+      <Image DockPanel.Dock="Left" Source="avares://Qevra/Assets/Icons/qevra.png" Width="52" Height="52"
              VerticalAlignment="Top" Margin="0,2,12,0" />
       <StackPanel Spacing="8">
         <DockPanel>
