@@ -19,8 +19,7 @@ public class DataDirectoryTests
 
             Environment.SetEnvironmentVariable(UserDataStore.DirectoryVariable, null);
             Assert.Null(UserDataStore.OverrideDirectory);
-            Assert.Equal(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Qevra"),
-                UserDataStore.DefaultDirectory);
+            Assert.Equal(UserDataStore.DetectDefaultDirectory(), UserDataStore.DefaultDirectory);
         }
         finally
         {

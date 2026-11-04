@@ -3,8 +3,10 @@
 
 using System.Text;
 using Qevra.Cli;
+using Qevra.Core.Settings;
 
 Console.OutputEncoding = Encoding.UTF8;
+UserDataStore.EnsureDataDirectoryOnDrive();
 using var cancel = new CancellationTokenSource();
 Console.CancelKeyPress += (_, e) =>
 {

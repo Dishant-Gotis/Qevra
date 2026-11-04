@@ -37,11 +37,68 @@ public sealed class UserDataStore
     public static string? OverrideDirectory => DirectoryFrom(Environment.GetEnvironmentVariable(DirectoryVariable));
 
     /// <summary>
+    /// If <see cref="DirectoryVariable"/> is not set, checks whether the application is running from a repository checkout,
+    /// portable folder, or a non-C drive (e.g. D:\), and automatically sets <see cref="DirectoryVariable"/> to a local "data" folder
+    /// on that drive so no user data, logs, or engines are written to the C: drive.
+    /// </summary>
+    public static void EnsureDataDirectoryOnDrive()
+    {
+        if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(DirectoryVariable)))
+            return;
+
+        // 1. Check parent hierarchy for repository root (Qevra.slnx or .git) or local data/portable marker
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        for (var depth = 0; dir is not null && depth < 8; depth++, dir = dir.Parent)
+        {
+            if (File.Exists(Path.Combine(dir.FullName, "Qevra.slnx")) ||
+                File.Exists(Path.Combine(dir.FullName, ".portable")) ||
+                System.IO.Directory.Exists(Path.Combine(dir.FullName, "data")))
+            {
+                var target = Path.Combine(dir.FullName, "data");
+                Environment.SetEnvironmentVariable(DirectoryVariable, target);
+                System.IO.Directory.CreateDirectory(target);
+                return;
+            }
+        }
+
+        // 2. If running on a non-C drive (e.g. D:\...), keep everything in a local data folder on that drive
+        var root = Path.GetPathRoot(AppContext.BaseDirectory);
+        if (!string.IsNullOrEmpty(root) && !root.StartsWith("C:", StringComparison.OrdinalIgnoreCase))
+        {
+            var target = Path.Combine(AppContext.BaseDirectory, "data");
+            Environment.SetEnvironmentVariable(DirectoryVariable, target);
+            System.IO.Directory.CreateDirectory(target);
+        }
+    }
+
+    /// <summary>
     /// Default data directory: %APPDATA%\Qevra on Windows, ~/Library/Application Support/Qevra on macOS, or the
     /// folder in <see cref="DirectoryVariable"/>.
     /// </summary>
+    public static string SystemDefaultDirectory =>
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Qevra");
+
     public static string DefaultDirectory =>
-        OverrideDirectory ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Qevra");
+        OverrideDirectory ?? DetectDefaultDirectory();
+
+    public static string DetectDefaultDirectory()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        for (var depth = 0; dir is not null && depth < 8; depth++, dir = dir.Parent)
+        {
+            if (File.Exists(Path.Combine(dir.FullName, "Qevra.slnx")) ||
+                File.Exists(Path.Combine(dir.FullName, ".portable")) ||
+                System.IO.Directory.Exists(Path.Combine(dir.FullName, "data")))
+            {
+                return Path.Combine(dir.FullName, "data");
+            }
+        }
+        var root = Path.GetPathRoot(AppContext.BaseDirectory);
+        if (!string.IsNullOrEmpty(root) && !root.StartsWith("C:", StringComparison.OrdinalIgnoreCase))
+            return Path.Combine(AppContext.BaseDirectory, "data");
+
+        return SystemDefaultDirectory;
+    }
 
     internal static string? DirectoryFrom(string? value) =>
         string.IsNullOrWhiteSpace(value) ? null : Path.TrimEndingDirectorySeparator(Path.GetFullPath(value.Trim()));

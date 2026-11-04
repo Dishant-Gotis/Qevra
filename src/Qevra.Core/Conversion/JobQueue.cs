@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Threading.Channels;
 using Qevra.Core.Formats;
 using Qevra.Core.Presets;
+using Qevra.Core.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -1327,7 +1328,7 @@ public sealed partial class JobQueue : IAsyncDisposable
     }
 
     /// <summary>Where every job has its work folder, named by the job's <see cref="ConversionJob.Id"/>.</summary>
-    public static string DefaultWorkRoot => Path.Combine(Path.GetTempPath(), "Qevra");
+    public static string DefaultWorkRoot => UserDataStore.OverrideDirectory is { } dir ? Path.Combine(dir, "temp") : Path.Combine(Path.GetTempPath(), "Qevra");
 
     /// <summary>
     /// Deletes the work folders of jobs a crash, a forced quit or a power cut kept from removing them: intermediate

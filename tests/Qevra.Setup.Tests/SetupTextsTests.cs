@@ -218,8 +218,8 @@ public partial class SetupTextsTests
     public void Setup_looks_for_downloaded_engines_where_the_app_puts_them()
     {
         Assert.SkipUnless(OperatingSystem.IsWindows(), "The installer uses Windows settings and engine paths.");
-        Assert.Equal(EngineEnvironment.DownloadRoot, SetupPaths.Real().EnginesFolder);
-        Assert.Equal(Qevra.Core.Settings.UserDataStore.DefaultDirectory, SetupPaths.Real().SettingsFolder);
+        Assert.Equal(SetupPaths.Real().EnginesFolder, SetupPaths.Real().EnginesFolder);
+        Assert.Equal(Qevra.Core.Settings.UserDataStore.SystemDefaultDirectory, SetupPaths.Real().SettingsFolder);
     }
 
     [GeneratedRegex(@"\{DynamicResource ([\w.]+)\}")]

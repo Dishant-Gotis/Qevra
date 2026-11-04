@@ -25,12 +25,10 @@ public sealed class EngineEnvironment(string dataDirectory)
     /// install root, so uninstalling removes it. With QEVRA_DATA_DIR set (<see cref="UserDataStore.DirectoryVariable"/>)
     /// it is the engines folder in there.
     /// </summary>
-    public static string DownloadRoot { get; set; } = DefaultDownloadRoot(UserDataStore.OverrideDirectory);
+    public static string DownloadRoot { get; set; } = DefaultDownloadRoot(UserDataStore.DefaultDirectory);
 
-    internal static string DefaultDownloadRoot(string? dataDirectoryOverride) =>
-        dataDirectoryOverride is not null
-            ? Path.Combine(dataDirectoryOverride, "engines")
-            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Qevra", "engines");
+    internal static string DefaultDownloadRoot(string? dataDirectory) =>
+        Path.Combine(dataDirectory ?? UserDataStore.DefaultDirectory, "engines");
 
     /// <summary>
     /// Finds an engine directory (<c>engines/&lt;name&gt;</c>): next to the executable (bundled with the installer),

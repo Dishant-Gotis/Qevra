@@ -4,6 +4,7 @@
 
 using Qevra.Core.Conversion;
 using Qevra.Core.Presets;
+using Qevra.Core.Settings;
 
 namespace Qevra.Core.Web;
 
@@ -119,7 +120,7 @@ public sealed class WebDrop : IDisposable
     }
 
     /// <summary>%TEMP%\Qevra\web: originals that aren't kept are saved here and deleted after their conversion.</summary>
-    public static string DefaultWorkRoot => Path.Combine(Path.GetTempPath(), "Qevra", "web");
+    public static string DefaultWorkRoot => UserDataStore.OverrideDirectory is { } dir ? Path.Combine(dir, "web") : Path.Combine(Path.GetTempPath(), "Qevra", "web");
 
     /// <summary>This drop's own folder inside the work root.</summary>
     public string WorkFolder { get; }

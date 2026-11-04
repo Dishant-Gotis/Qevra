@@ -59,3 +59,9 @@ src/Qevra.App/Assets/Fonts/*.otf
 
 # Agent skills & local configuration
 .agents/
+
+# Local data & portable storage on D:
+data/
+dist/
+.portable
+
