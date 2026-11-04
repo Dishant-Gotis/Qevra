@@ -113,15 +113,14 @@ jobs:
           merge-multiple: true
           path: Releases
 
-      - name: Draft the GitHub release
+      - name: Publish the GitHub release
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $version = '${{ steps.version.outputs.value }}'
-          # Linux and macOS only: build/sign-release.ps1 adds the signed Windows files.
-          $windows = "Qevra-$version-win-Setup.exe", "Qevra-$version-win-Portable.zip", "Qevra-$version-SHA256SUMS.txt"
-          $files = Get-ChildItem Releases -File -Filter "Qevra-$version-*" | Where-Object Name -notin $windows | ForEach-Object FullName
+          # Include all release files: Windows installer, portable zip, checksums, and Linux/macOS packages
+          $files = Get-ChildItem Releases -File -Filter "Qevra-$version-*" | ForEach-Object FullName
           # "## 1.4.0" up to the next "## " heading of CHANGELOG.md, without the heading itself.
           $changes = ''
           $changelog = Get-Content CHANGELOG.md -Raw -Encoding utf8
@@ -147,4 +146,4 @@ jobs:
           if ($tail) { $parts += $tail }
           $notesFile = Join-Path $env:RUNNER_TEMP 'notes.md'
           Set-Content $notesFile ($parts -join "`n`n") -Encoding utf8
-          gh release create '${{ github.ref_name }}' --draft --title "Qevra $version" --notes-file $notesFile --verify-tag @files
+          gh release create '${{ github.ref_name }}' --title "Qevra $version" --notes-file $notesFile --verify-tag @files
