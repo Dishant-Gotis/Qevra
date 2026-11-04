@@ -1,4 +1,4 @@
-<!-- Main window = settings: navigation on the left, current page on the right. Closing hides to the tray. -->
+<!-- Main window = settings: modern retro glass command dock + current page. Closing hides to the tray. -->
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Qevra.App.ViewModels"
@@ -6,112 +6,136 @@
         x:DataType="vm:MainWindowViewModel"
         Title="Qevra"
         Icon="avares://Qevra/Assets/Icons/qevra.ico"
-        Width="1080" Height="760" MinWidth="820" MinHeight="560"
+        Width="1120" Height="780" MinWidth="860" MinHeight="580"
         WindowStartupLocation="CenterScreen">
-  <Grid ColumnDefinitions="Auto,*">
-    <!-- Navigation: full width with titles, or collapsed to an icon rail (tooltips instead of text). The width animates. -->
-    <Border Classes="navpane" Classes.collapsed="{Binding IsNavCollapsed}" Width="{Binding NavWidth}" ClipToBounds="True"
-            Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource SubtleBorderBrush}" BorderThickness="0,0,1,0">
-      <DockPanel Margin="{Binding NavPadding}">
-        <StackPanel DockPanel.Dock="Top" Classes="navheader" Orientation="Horizontal" Spacing="12" Margin="0,0,0,8">
-          <Border Width="48" Height="48" CornerRadius="13" Background="{DynamicResource SurfaceAltBrush}"
-                  BorderBrush="{DynamicResource SubtleBorderBrush}" BorderThickness="1.2"
-                  BoxShadow="{DynamicResource CardShadow}" VerticalAlignment="Center">
-            <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="38" Height="38" HorizontalAlignment="Center" VerticalAlignment="Center" />
+  <Grid RowDefinitions="Auto,*">
+
+    <!-- Top Modern Retro Glass Command Header & Capsule Dock -->
+    <Border Grid.Row="0" Background="{DynamicResource GlassSurfaceBrush}"
+            BorderBrush="{DynamicResource GlassCardBorderBrush}" BorderThickness="0,0,0,1.2"
+            BoxShadow="{DynamicResource GlassCardShadow}" Padding="16,10">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        
+        <!-- Left: Glowing Cyber Brand Hub -->
+        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+          <Border Width="46" Height="46" CornerRadius="14" Background="{DynamicResource GlassSurfaceAltBrush}"
+                  BorderBrush="{DynamicResource GlassCardBorderCyanBrush}" BorderThickness="1.5"
+                  BoxShadow="{DynamicResource GlassGlowCyanShadow}" VerticalAlignment="Center">
+            <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="36" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" />
           </Border>
-          <StackPanel VerticalAlignment="Center" IsVisible="{Binding !IsNavCollapsed}">
+          <StackPanel VerticalAlignment="Center" Spacing="2">
             <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-              <TextBlock Text="QEVRA" FontSize="19" FontWeight="Bold" LetterSpacing="0.8" />
-              <Border CornerRadius="4" Padding="5,1" Background="{DynamicResource AccentSoftBrush}" VerticalAlignment="Center">
-                <TextBlock Text="PRO" FontSize="9.5" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" LetterSpacing="0.5" />
+              <TextBlock Text="QEVRA" FontSize="19" FontWeight="Bold" LetterSpacing="1.2" Foreground="{DynamicResource TextPrimaryBrush}" />
+              <Border CornerRadius="4" Padding="5,1" Background="{DynamicResource AccentSoftBrush}" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="1" VerticalAlignment="Center">
+                <TextBlock Text="PRO" FontSize="9.5" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" LetterSpacing="0.8" />
               </Border>
             </StackPanel>
-            <TextBlock Classes="caption" Text="{DynamicResource app.tagline}" />
+            <Border Classes="hud-pill" Padding="6,1" HorizontalAlignment="Left">
+              <TextBlock Text="● CYBER-CORE // v2.3" FontSize="9.5" FontWeight="SemiBold" Foreground="{DynamicResource NeonCyanBrush}" LetterSpacing="0.6" />
+            </Border>
           </StackPanel>
         </StackPanel>
-        <!-- Bottom: the running version, and a download button when a newer release is out. -->
-        <StackPanel DockPanel.Dock="Bottom" Spacing="8" Margin="4,12,4,0">
-          <!-- Collapsed: the same actions as icons only, each with a tooltip -->
-          <StackPanel Spacing="8" IsVisible="{Binding IsNavCollapsed}">
-            <Button Classes.accent="{Binding !Updates.IsOptional}" Padding="8,6" HorizontalAlignment="Stretch"
-                    Command="{Binding DownloadUpdateCommand}" IsVisible="{Binding Updates.IsUpdateAvailable}"
-                    ToolTip.Tip="{Binding UpdateTip}" ToolTip.Placement="Right">
-              <PathIcon Width="14" Height="14" Data="{StaticResource Icon.Download}" />
-            </Button>
-            <Button Classes="navlink" HorizontalAlignment="Stretch" Click="OnOpenGitHub"
-                    ToolTip.Tip="{Binding RepositoryUrl}" ToolTip.Placement="Right">
-              <PathIcon Width="13" Height="13" Data="{StaticResource Icon.GitHub}" />
-            </Button>
-            <Button Classes="navlink" HorizontalAlignment="Stretch" Click="OnSponsor"
-                    ToolTip.Tip="{DynamicResource about.sponsor}" ToolTip.Placement="Right">
-              <PathIcon Width="13" Height="13" Data="{StaticResource Icon.Heart}" Foreground="#D4537E" />
-            </Button>
-          </StackPanel>
-          <!-- Expanded -->
-          <StackPanel Spacing="8" IsVisible="{Binding !IsNavCollapsed}">
-            <!-- Accent for required and recommended updates, plain for optional ones; a pill says which -->
-            <Button x:Name="UpdateButton" Classes.accent="{Binding !Updates.IsOptional}" HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch"
-                    Command="{Binding DownloadUpdateCommand}" IsVisible="{Binding Updates.IsUpdateAvailable}"
-                    ToolTip.Tip="{Binding UpdateTip}">
-              <DockPanel>
-                <Border DockPanel.Dock="Right" CornerRadius="999" Padding="6,1" Margin="6,0,0,0" VerticalAlignment="Center"
-                        Background="{DynamicResource DangerBrush}" IsVisible="{Binding Updates.IsRequired}">
-                  <TextBlock Text="{DynamicResource update.pill.Required}" FontSize="11" FontWeight="SemiBold" Foreground="White" />
+
+        <!-- Center: Floating Glass Capsule Navigation Dock -->
+        <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0"
+                Background="{DynamicResource GlassDockBrush}" CornerRadius="999"
+                BorderBrush="{DynamicResource GlassCardBorderBrush}" BorderThickness="1.2"
+                Padding="4,3" BoxShadow="0 4 16 0 #25000000">
+          <ListBox Classes="nav dock-nav" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+            <ListBox.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="2" />
+              </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="vm:NavItem">
+                <Border Background="Transparent" Padding="11,7" CornerRadius="999"
+                        ToolTip.Tip="{Binding Tip}" ToolTip.Placement="Bottom"
+                        AutomationProperties.Name="{Binding Title}">
+                  <StackPanel Classes="navitem" Orientation="Horizontal" Spacing="7" VerticalAlignment="Center">
+                    <PathIcon Classes="navicon" Width="14" Height="14" Data="{Binding Icon}" />
+                    <TextBlock Text="{Binding Title}" FontSize="12.5" FontWeight="SemiBold" VerticalAlignment="Center" IsVisible="{Binding ShowTitle}" />
+                  </StackPanel>
                 </Border>
-                <Border DockPanel.Dock="Right" CornerRadius="999" Padding="6,1" Margin="6,0,0,0" VerticalAlignment="Center"
-                        Background="{DynamicResource SurfaceAltBrush}" IsVisible="{Binding Updates.IsOptional}">
-                  <TextBlock Classes="caption" Text="{DynamicResource update.pill.Optional}" FontSize="11" />
-                </Border>
-                <StackPanel Orientation="Horizontal" Spacing="8">
-                  <PathIcon Width="14" Height="14" Data="{StaticResource Icon.Download}" />
-                  <TextBlock Text="{Binding UpdateText}" TextTrimming="CharacterEllipsis" />
-                </StackPanel>
-              </DockPanel>
-            </Button>
-            <!-- The project on GitHub, and sponsoring it -->
-            <Grid ColumnDefinitions="*,6,*">
-              <Button Classes="navlink" HorizontalAlignment="Stretch" Click="OnOpenGitHub" ToolTip.Tip="{Binding RepositoryUrl}">
-                <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
-                  <PathIcon Width="13" Height="13" Data="{StaticResource Icon.GitHub}" />
-                  <TextBlock Text="GitHub" />
-                </StackPanel>
-              </Button>
-              <Button Grid.Column="2" Classes="navlink" HorizontalAlignment="Stretch" Click="OnSponsor">
-                <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
-                  <PathIcon Width="13" Height="13" Data="{StaticResource Icon.Heart}" Foreground="#D4537E" />
-                  <TextBlock Text="{DynamicResource about.sponsor}" />
-                </StackPanel>
-              </Button>
-            </Grid>
-            <TextBlock x:Name="VersionLabel" Classes="caption" Margin="8,0,0,0" Text="{Binding VersionText}" />
-          </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </Border>
+
+        <!-- Right: Modern Retro Glass Utilities & Controls -->
+        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          
+          <!-- "Another thing too": Retro CRT Scanline Toggle -->
+          <ToggleButton Classes="cyber-toggle" IsChecked="{Binding IsCrtScanlinesEnabled}"
+                       Padding="8,5" CornerRadius="8"
+                       ToolTip.Tip="Toggle Retro CRT Scanline Filter"
+                       AutomationProperties.Name="Toggle Retro CRT Scanline Filter">
+            <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+              <TextBlock Text="📺" FontSize="13" />
+              <TextBlock Text="CRT" FontSize="11" FontWeight="Bold" LetterSpacing="0.5" />
+            </StackPanel>
+          </ToggleButton>
+
+          <!-- Dock expand / collapse toggle (switches between icon-capsule and full labels) -->
+          <Button Classes="icon navtoggle" Command="{Binding ToggleNavCommand}"
+                  ToolTip.Tip="{Binding NavToggleTip}" ToolTip.Placement="Bottom"
+                  AutomationProperties.Name="{Binding NavToggleTip}">
+            <PathIcon Width="16" Height="16" Data="{StaticResource Icon.Sidebar}" />
+          </Button>
+
+          <!-- Update button (shows when update available) -->
+          <Button x:Name="UpdateButton" Classes.accent="{Binding !Updates.IsOptional}"
+                  Command="{Binding DownloadUpdateCommand}" IsVisible="{Binding Updates.IsUpdateAvailable}"
+                  ToolTip.Tip="{Binding UpdateTip}" AutomationProperties.Name="{Binding UpdateText}"
+                  Padding="10,5" CornerRadius="8">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <PathIcon Width="13" Height="13" Data="{StaticResource Icon.Download}" />
+              <TextBlock Text="{Binding UpdateText}" FontSize="11" FontWeight="SemiBold" />
+            </StackPanel>
+          </Button>
+
+          <!-- GitHub pill -->
+          <Button Classes="navlink" Click="OnOpenGitHub" ToolTip.Tip="{Binding RepositoryUrl}"
+                  Padding="8,5" CornerRadius="8" AutomationProperties.Name="GitHub">
+            <PathIcon Width="13" Height="13" Data="{StaticResource Icon.GitHub}" />
+          </Button>
+
+          <!-- Sponsor pill -->
+          <Button Classes="navlink" Click="OnSponsor" ToolTip.Tip="{DynamicResource about.sponsor}"
+                  Padding="8,5" CornerRadius="8" AutomationProperties.Name="{DynamicResource about.sponsor}">
+            <PathIcon Width="13" Height="13" Data="{StaticResource Icon.Heart}" Foreground="#D4537E" />
+          </Button>
+
+          <!-- Version info -->
+          <TextBlock x:Name="VersionLabel" Classes="caption" VerticalAlignment="Center" Margin="4,0,0,0"
+                     Text="{Binding VersionText}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" />
         </StackPanel>
-        <!-- Collapse / expand: sits just above the update / GitHub / Sponsor group; the logo and name stay at the top -->
-        <Button DockPanel.Dock="Bottom" Classes="icon navtoggle" Margin="0,8,0,0" Command="{Binding ToggleNavCommand}"
-                ToolTip.Tip="{Binding NavToggleTip}" ToolTip.Placement="Right" AutomationProperties.Name="{Binding NavToggleTip}">
-          <PathIcon Width="17" Height="17" Data="{StaticResource Icon.Sidebar}" />
-        </Button>
-        <ListBox Classes="nav" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
-          <ListBox.ItemTemplate>
-            <DataTemplate x:DataType="vm:NavItem">
-              <!-- Fills the whole row, so the tooltip (collapsed only) shows anywhere on it -->
-              <Border Background="Transparent" Padding="12,9" ToolTip.Tip="{Binding Tip}" ToolTip.Placement="Right"
-                      AutomationProperties.Name="{Binding Title}">
-                <StackPanel Classes="navitem" Orientation="Horizontal" Spacing="12">
-                  <PathIcon Classes="navicon" Width="17" Height="17" Data="{Binding Icon}" />
-                  <TextBlock Text="{Binding Title}" VerticalAlignment="Center" IsVisible="{Binding ShowTitle}" />
-                </StackPanel>
-              </Border>
-            </DataTemplate>
-          </ListBox.ItemTemplate>
-        </ListBox>
-      </DockPanel>
+
+      </Grid>
     </Border>
 
-    <!-- Page -->
-    <ScrollViewer Grid.Column="1" x:Name="PageScroller" VerticalScrollBarVisibility="{Binding PageScroll}">
-      <ContentControl Classes="page" Content="{Binding CurrentPage}" Margin="32,26,32,32" MaxWidth="980" HorizontalAlignment="Stretch" />
-    </ScrollViewer>
+    <!-- Main Workspace Content Area with HUD Corner Accents and CRT Scanlines -->
+    <Grid Grid.Row="1">
+      
+      <!-- Primary Page Scroller -->
+      <ScrollViewer x:Name="PageScroller" VerticalScrollBarVisibility="{Binding PageScroll}">
+        <ContentControl Classes="page" Content="{Binding CurrentPage}" Margin="32,24,32,32" MaxWidth="1040" HorizontalAlignment="Stretch" />
+      </ScrollViewer>
+
+      <!-- Retro Cyber HUD Corner Brackets Overlay -->
+      <Grid IsHitTestVisible="False" Margin="16,12" RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto,*,Auto">
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="┌" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource NeonCyanBrush}" Opacity="0.35" />
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="┐" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource NeonCyanBrush}" Opacity="0.35" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="└" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource NeonCyanBrush}" Opacity="0.35" />
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="┘" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource NeonCyanBrush}" Opacity="0.35" />
+      </Grid>
+
+      <!-- "Another thing too": Retro CRT Phosphor Scanline Overlay -->
+      <Border x:Name="CrtScanlineOverlay" IsHitTestVisible="False"
+              Background="{DynamicResource CrtScanlineBrush}"
+              Opacity="0.45"
+              IsVisible="{Binding IsCrtScanlinesEnabled}" />
+
+    </Grid>
   </Grid>
 </Window>

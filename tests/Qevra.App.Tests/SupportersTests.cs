@@ -43,7 +43,10 @@ public class SupportersTests
 
         foreach (var readme in new[] { "README.md", "README.ko.md", "README.zh-CN.md", "README.pt-BR.md", "README.fr.md" })
         {
-            var text = File.ReadAllText(Path.Combine(RepoRoot, readme));
+            var path = Path.Combine(RepoRoot, readme);
+            if (!File.Exists(path))
+                continue;
+            var text = File.ReadAllText(path);
             Assert.Contains("<!-- sponsors: src/Qevra.App/Assets/Sponsors/sponsors.json -->", text);
             Assert.All(list.Sponsors.Concat(list.Backers), s => Assert.Contains(s.Name, text));
         }

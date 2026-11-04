@@ -107,6 +107,13 @@ public sealed partial class MainWindowViewModel : ObservableObject, IDisposable
     [RelayCommand]
     private void ToggleNav() => IsNavCollapsed = !IsNavCollapsed;
 
+    /// <summary>Toggleable retro arcade CRT scanline and cyber HUD filter.</summary>
+    [ObservableProperty]
+    private bool _isCrtScanlinesEnabled;
+
+    [RelayCommand]
+    private void ToggleCrtScanlines() => IsCrtScanlinesEnabled = !IsCrtScanlinesEnabled;
+
     partial void OnIsNavCollapsedChanged(bool value)
     {
         foreach (var item in Items)

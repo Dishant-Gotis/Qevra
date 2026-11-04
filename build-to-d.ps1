@@ -5,12 +5,15 @@
 #>
 [CmdletBinding()]
 param(
-    [string]$TargetDir = (Join-Path $PSScriptRoot 'dist'),
+    [string]$TargetDir = "",
     [ValidateSet('Debug', 'Release')][string]$Configuration = 'Release'
 )
 
 $ErrorActionPreference = 'Stop'
-$root = $PSScriptRoot
+$root = if ($PSScriptRoot) { $PSScriptRoot } else { "D:\GIT-REPOS\Qevra" }
+if (-not $TargetDir) {
+    $TargetDir = Join-Path $root 'dist'
+}
 
 Write-Host "Publishing Qevra to $TargetDir ($Configuration)..." -ForegroundColor Cyan
 
@@ -33,4 +36,3 @@ if (Test-Path (Join-Path $root 'engines')) {
 
 Write-Host "Build complete! Qevra is ready on D: drive at: $TargetDir" -ForegroundColor Green
 Write-Host "All settings, user data, and engines will be stored inside: $(Join-Path $TargetDir 'data')" -ForegroundColor Green
-

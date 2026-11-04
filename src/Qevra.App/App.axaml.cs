@@ -224,7 +224,7 @@ public partial class App : Application
     /// converts, like a picture from a browser, without keeping the original. The results go back on the clipboard.
     /// With neither on the clipboard, nothing opens.
     /// </summary>
-    private static void ShowForClipboard(RadialController radial, IPlatformServices platform, int x, int y, ILogger log)
+    internal static void ShowForClipboard(RadialController radial, IPlatformServices platform, int x, int y, ILogger log)
     {
         ClipboardContent? content;
         try

@@ -32,3 +32,6 @@
 ## License
 
 Qevra is open-source software licensed under the [MIT License](LICENSE).
+
+
+<!-- sponsors: src/Qevra.App/Assets/Sponsors/sponsors.json -->

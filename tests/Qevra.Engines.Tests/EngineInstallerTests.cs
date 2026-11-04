@@ -23,7 +23,7 @@ public sealed class EngineInstallerTests : IDisposable
     public void A_separate_data_folder_keeps_its_own_engines()
     {
         Assert.Equal(Path.Combine(_root, "engines"), EngineEnvironment.DefaultDownloadRoot(_root));
-        Assert.Equal(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Qevra", "engines"),
+        Assert.Equal(Path.Combine(Qevra.Core.Settings.UserDataStore.DefaultDirectory, "engines"),
             EngineEnvironment.DefaultDownloadRoot(null));
     }
 
