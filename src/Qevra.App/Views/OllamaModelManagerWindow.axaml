@@ -127,12 +127,14 @@
                             </Style>
                           </Button.Styles>
                         </Button>
-                        <Button Classes="danger" Content="🗑" ToolTip.Tip="{DynamicResource common.delete}"
+                        <Button Classes="danger"  ToolTip.Tip="{DynamicResource common.delete}"
                                 AutomationProperties.Name="{Binding DeleteAutomationName}"
                                 Command="{Binding $parent[Window].((vm:OllamaModelManagerViewModel)DataContext).DeleteModelCommand}"
                                 CommandParameter="{Binding}"
                                 IsEnabled="{Binding !IsDeleting}"
-                                Padding="8,6" />
+                                Padding="8,6">
+                          <PathIcon Width="13" Height="13" Data="{StaticResource Icon.Delete}" />
+                        </Button>
                       </StackPanel>
 
                       <!-- Left Details -->

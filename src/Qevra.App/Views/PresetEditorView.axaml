@@ -257,7 +257,7 @@
           <StackPanel Grid.Column="2" VerticalAlignment="Bottom">
             <Button Classes="secondary" Command="{Binding TestTranslationCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" IsEnabled="{Binding !IsTestingTranslation}">
               <StackPanel Orientation="Horizontal" Spacing="6">
-                <TextBlock Text="⚡" />
+                <PathIcon Width="12" Height="12" Data="{StaticResource Icon.Refresh}" />
                 <TextBlock Text="{DynamicResource presets.test_connection}" />
               </StackPanel>
             </Button>

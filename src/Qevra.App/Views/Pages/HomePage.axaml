@@ -8,18 +8,16 @@
     <Style Selector="Border#DropZone">
       <Setter Property="Transitions">
         <Transitions>
-          <BrushTransition Property="Background" Duration="0:0:0.25" />
-          <BrushTransition Property="BorderBrush" Duration="0:0:0.25" />
-          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3" Easing="{StaticResource SoftEase}" />
-          <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.3" />
+          <BrushTransition Property="Background" Duration="0:0:0.2" />
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.2" />
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="{StaticResource SoftEase}" />
         </Transitions>
       </Setter>
     </Style>
     <Style Selector="Border#DropZone.over">
       <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
-      <Setter Property="BorderBrush" Value="{DynamicResource NeonCyanBrush}" />
-      <Setter Property="BoxShadow" Value="{DynamicResource GlassGlowCyanShadow}" />
-      <Setter Property="RenderTransform" Value="scale(1.015)" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="RenderTransform" Value="scale(1.012)" />
     </Style>
     <Style Selector="PathIcon.chevron">
       <Setter Property="RenderTransform" Value="rotate(0deg)" />
@@ -30,28 +28,8 @@
   </UserControl.Styles>
 
   <StackPanel Spacing="22">
-
-    <!-- Cyber Telemetry Studio Header -->
-    <DockPanel>
-      <WrapPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-        <Border Classes="hud-pill" Margin="3,0">
-          <StackPanel Orientation="Horizontal" Spacing="5">
-            <TextBlock Text="⚡" FontSize="10" />
-            <TextBlock Text="CORE ENGINE: ACTIVE" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" LetterSpacing="0.5" />
-          </StackPanel>
-        </Border>
-        <Border Classes="hud-pill" Margin="3,0">
-          <StackPanel Orientation="Horizontal" Spacing="5">
-            <TextBlock Text="🌸" FontSize="10" />
-            <TextBlock Text="FLOWER RING: ARMED (Alt+Move)" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource NeonVioletBrush}" LetterSpacing="0.5" />
-          </StackPanel>
-        </Border>
-      </WrapPanel>
-      <StackPanel Spacing="2">
-        <TextBlock Classes="h1" FontSize="22" FontWeight="Bold" LetterSpacing="0.8" Text="{DynamicResource home.title}" />
-        <TextBlock Classes="caption" Text="// Universal Transmutation Studio &amp; Blossom Hub" Foreground="{DynamicResource TextSecondaryBrush}" />
-      </StackPanel>
-    </DockPanel>
+    <!-- Header -->
+    <TextBlock Classes="h1" Text="{DynamicResource home.title}" />
 
     <!-- macOS without Accessibility permission: the drag gesture can't work yet. Gone once it is given. -->
     <Border IsVisible="{Binding NeedsAccessibility}" Background="{DynamicResource AccentFaintBrush}"
@@ -78,88 +56,82 @@
       </DockPanel>
     </Border>
 
-    <!-- The Glass Transmutation Chamber (DropZone) -->
-    <Border x:Name="DropZone" DragDrop.AllowDrop="True" MinHeight="260"
+    <!-- Conversion Hub Drop Zone -->
+    <Border x:Name="DropZone" DragDrop.AllowDrop="True" MinHeight="250"
             Cursor="Hand" ToolTip.Tip="{DynamicResource home.drop_select}"
-            Background="{DynamicResource GlassSurfaceBrush}" BorderBrush="{DynamicResource GlassCardBorderBrush}"
-            BorderThickness="1.5" CornerRadius="{DynamicResource SoftRadiusLarge}" Padding="32,24"
-            BoxShadow="{DynamicResource GlassCardShadow}">
-      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+            Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource SubtleBorderBrush}"
+            BorderThickness="1" CornerRadius="{DynamicResource SoftRadiusLarge}" Padding="32,26"
+            BoxShadow="{DynamicResource CardShadow}">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14">
         
-        <!-- Glowing Holographic Logo Orb with floral pulse border -->
-        <Border Width="92" Height="92" CornerRadius="26" Background="{DynamicResource GlassSurfaceAltBrush}"
-                BorderBrush="{DynamicResource GlassCardBorderCyanBrush}" BorderThickness="1.8"
-                BoxShadow="{DynamicResource GlassGlowCyanShadow}" HorizontalAlignment="Center">
-          <Grid>
-            <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="64" Height="64" HorizontalAlignment="Center" VerticalAlignment="Center" />
-          </Grid>
+        <!-- App Logo Container -->
+        <Border Width="64" Height="64" CornerRadius="18" Background="{DynamicResource SurfaceAltBrush}"
+                BorderBrush="{DynamicResource SubtleBorderBrush}" BorderThickness="1"
+                BoxShadow="0 4 16 0 #20000000" HorizontalAlignment="Center">
+          <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="42" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
 
+        <!-- Drop Instructions -->
         <StackPanel Spacing="4" HorizontalAlignment="Center">
-          <TextBlock Classes="h1" FontSize="21" FontWeight="Bold" LetterSpacing="0.8" HorizontalAlignment="Center" Text="{DynamicResource home.drop_title}" />
-          <TextBlock Classes="muted" FontSize="13" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="540"
+          <TextBlock Classes="h1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Text="{DynamicResource home.drop_title}" />
+          <TextBlock Classes="muted" FontSize="13" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="500"
                      Text="{Binding DropHint}" />
         </StackPanel>
         
-        <!-- Dedicated Instant Action Controls Deck -->
-        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-          <Button x:Name="SelectFilesButton" Classes="cyber-action" Margin="4"
-                  AutomationProperties.Name="Select Files" ToolTip.Tip="Open system file picker">
-            <StackPanel Orientation="Horizontal" Spacing="7">
-              <PathIcon Width="14" Height="14" Data="{StaticResource Icon.File}" Foreground="{DynamicResource NeonCyanBrush}" />
-              <TextBlock Text="Select Files..." FontSize="12.5" FontWeight="SemiBold" />
+        <!-- Action Buttons -->
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,4,0,0">
+          <Button x:Name="SelectFilesButton" Classes="accent" Margin="4" Padding="14,8"
+                  AutomationProperties.Name="Select Files" ToolTip.Tip="Open file picker">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <PathIcon Width="14" Height="14" Data="{StaticResource Icon.File}" />
+              <TextBlock Text="Select Files..." FontSize="13" FontWeight="SemiBold" />
             </StackPanel>
           </Button>
 
-          <Button x:Name="PasteClipboardButton" Classes="cyber-action" Margin="4"
-                  AutomationProperties.Name="From Clipboard" ToolTip.Tip="Convert copied files or image from clipboard">
-            <StackPanel Orientation="Horizontal" Spacing="7">
-              <PathIcon Width="14" Height="14" Data="{StaticResource Icon.Clipboard}" Foreground="{DynamicResource NeonAmberBrush}" />
-              <TextBlock Text="From Clipboard" FontSize="12.5" FontWeight="SemiBold" />
+          <Button x:Name="PasteClipboardButton" Classes="secondary" Margin="4" Padding="14,8"
+                  AutomationProperties.Name="From Clipboard" ToolTip.Tip="Convert from clipboard">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <PathIcon Width="14" Height="14" Data="{StaticResource Icon.Clipboard}" />
+              <TextBlock Text="From Clipboard" FontSize="13" FontWeight="SemiBold" />
             </StackPanel>
           </Button>
 
-          <Button x:Name="TestFlowerRingButton" Classes="cyber-action" Margin="4"
-                  AutomationProperties.Name="Test Flower Ring" ToolTip.Tip="Preview &amp; test the blooming flower petal radial menu">
-            <StackPanel Orientation="Horizontal" Spacing="7">
-              <TextBlock Text="🌸" FontSize="13" />
-              <TextBlock Text="Test Flower Ring" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource NeonVioletBrush}" />
+          <Button x:Name="TestFlowerRingButton" Classes="ghost" Margin="4" Padding="14,8"
+                  AutomationProperties.Name="Test Action Ring" ToolTip.Tip="Preview &amp; test the Action Ring radial menu">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <PathIcon Width="14" Height="14" Data="{StaticResource Icon.Donut}" Foreground="{DynamicResource AccentBrush}" />
+              <TextBlock Text="Test Action Ring" FontSize="13" FontWeight="SemiBold" />
             </StackPanel>
           </Button>
         </WrapPanel>
 
-        <!-- Interactive Format Synthesizer Matrix -->
-        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,4,0,0">
-          <Border Classes="synth-tile" Margin="3">
-            <TextBlock Text="🖼️ Images: PNG, JPG, WEBP, SVG, GIF, AVIF" FontSize="11" FontWeight="SemiBold" />
+        <!-- Clean Format Category Chips (Zero Emojis) -->
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,6,0,0">
+          <Border Classes="chip" Margin="3" Background="{DynamicResource SurfaceAltBrush}">
+            <TextBlock Text="Images" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource TextSecondaryBrush}" />
           </Border>
-          <Border Classes="synth-tile" Margin="3">
-            <TextBlock Text="📄 Documents: PDF, DOCX, TXT, MD, EPUB" FontSize="11" FontWeight="SemiBold" />
+          <Border Classes="chip" Margin="3" Background="{DynamicResource SurfaceAltBrush}">
+            <TextBlock Text="Documents" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource TextSecondaryBrush}" />
           </Border>
-          <Border Classes="synth-tile" Margin="3">
-            <TextBlock Text="🎬 Media: MP4, MKV, MP3, WAV, FLAC" FontSize="11" FontWeight="SemiBold" />
+          <Border Classes="chip" Margin="3" Background="{DynamicResource SurfaceAltBrush}">
+            <TextBlock Text="Media" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource TextSecondaryBrush}" />
           </Border>
-          <Border Classes="synth-tile" Margin="3">
-            <TextBlock Text="📐 3D &amp; CAD: OBJ, STL, GLTF, FBX" FontSize="11" FontWeight="SemiBold" />
+          <Border Classes="chip" Margin="3" Background="{DynamicResource SurfaceAltBrush}">
+            <TextBlock Text="3D &amp; CAD" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource TextSecondaryBrush}" />
           </Border>
-          <Border Classes="synth-tile" Margin="3">
-            <TextBlock Text="📦 Archives: ZIP, 7Z, TAR, GZ, BZ2" FontSize="11" FontWeight="SemiBold" />
+          <Border Classes="chip" Margin="3" Background="{DynamicResource SurfaceAltBrush}">
+            <TextBlock Text="Archives" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource TextSecondaryBrush}" />
           </Border>
         </WrapPanel>
 
       </StackPanel>
     </Border>
 
-    <!-- Recent Conversions & Activity Terminal -->
+    <!-- Recent Conversions -->
     <StackPanel Spacing="12">
       <DockPanel>
         <Button DockPanel.Dock="Right" Classes="ghost" Content="{DynamicResource home.clear_history}" Command="{Binding ClearHistoryCommand}" />
-        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-          <TextBlock Classes="h2" VerticalAlignment="Center" Text="{DynamicResource home.recent}" />
-          <Border Classes="hud-pill" Padding="6,1" VerticalAlignment="Center">
-            <TextBlock Text="// LOG" FontSize="9.5" FontWeight="Bold" Foreground="{DynamicResource NeonCyanBrush}" />
-          </Border>
-        </StackPanel>
+        <TextBlock Classes="h2" VerticalAlignment="Center" Text="{DynamicResource home.recent}" />
       </DockPanel>
 
       <TextBox Classes="search clearButton" Text="{Binding Search}" PlaceholderText="{DynamicResource common.search}"
@@ -170,11 +142,8 @@
       </TextBox>
 
       <!-- Empty state card -->
-      <Border Classes="glass-card" Padding="24" IsVisible="{Binding IsEmpty}">
-        <StackPanel HorizontalAlignment="Center" Spacing="8">
-          <TextBlock Classes="h2" HorizontalAlignment="Center" Text="[ SYSTEM READY // AWAITING INPUT STREAM ]" FontSize="13.5" FontWeight="Bold" Foreground="{DynamicResource NeonCyanBrush}" LetterSpacing="0.8" />
-          <TextBlock Classes="muted" HorizontalAlignment="Center" Text="{DynamicResource home.recent_empty}" />
-        </StackPanel>
+      <Border Classes="card" Padding="28" IsVisible="{Binding IsEmpty}">
+        <TextBlock Classes="muted" HorizontalAlignment="Center" Text="{DynamicResource home.recent_empty}" />
       </Border>
 
       <TextBlock Classes="muted" Text="{DynamicResource home.no_matches}" IsVisible="{Binding NoMatches}" />
@@ -187,7 +156,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
           <DataTemplate x:DataType="vm:HistoryItemViewModel">
-            <Border Classes="glass-card history-card" Padding="14,10">
+            <Border Classes="card history-card" Padding="14,10">
               <StackPanel Spacing="8">
                 <DockPanel>
                   <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center"
