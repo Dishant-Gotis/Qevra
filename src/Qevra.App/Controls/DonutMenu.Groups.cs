@@ -29,7 +29,7 @@ public sealed partial class DonutMenu
     public const double SubRingSpace = SubGap + SubBand + 10;
 
     /// <summary>Width and height of a donut of <paramref name="outerRadius"/>, with room for group rings when asked.</summary>
-    public static double SideFor(double outerRadius, bool subRing) => 2 * (outerRadius + PopOut + 14 + (subRing ? SubRingSpace : 0));
+    public static double SideFor(double outerRadius, bool subRing) => 2 * (outerRadius + PopOut + 28 + (subRing ? SubRingSpace : 0));
 
     // Group slices: the one fanned out (-1 none), the one still drawn while its ring folds away, and the hovered
     // slice of the ring.

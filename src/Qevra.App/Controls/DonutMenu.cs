@@ -938,7 +938,7 @@ public sealed partial class DonutMenu : Control
     private void DrawSoftShadow(DrawingContext context, Point center, double r2)
     {
         // A radial gradient ring fakes a soft drop shadow without blur effects (cheap on any GPU).
-        var shadowRadius = r2 + 14;
+        var shadowRadius = r2 + 26;
         var brush = new RadialGradientBrush
         {
             GradientStops =
@@ -960,6 +960,9 @@ public sealed partial class DonutMenu : Control
         var radius = (r1 - 6) * pulse;
         var cancelHot = _externalCenterHot;
         context.DrawEllipse(CenterBrush, BorderPen(), center, radius, radius);
+        // Soft floral pistil stamen ring
+        var pistilPen = new Pen(WithOpacity(AccentBrush, 0.28), 1.2, dashStyle: DashStyle.Dash);
+        context.DrawEllipse(null, pistilPen, center, radius * 0.78, radius * 0.78);
         if (cancelHot)
             context.DrawEllipse(WithOpacity(DangerBrush, 0.18), null, center, radius, radius);
 
@@ -1252,13 +1255,47 @@ public sealed partial class DonutMenu : Control
         var geometry = new StreamGeometry();
         using var ctx = geometry.Open();
         ctx.BeginFigure(outline.Start, true);
+
+        // Flower Petal: arch the outer rim into an organic blooming petal curve
+        var isFirst = true;
         foreach (var step in outline.Steps)
         {
             if (step.IsArc)
-                ctx.ArcTo(step.To, new Size(step.ArcRadius, step.ArcRadius), 0, step.IsLargeArc,
-                    step.Clockwise ? SweepDirection.Clockwise : SweepDirection.CounterClockwise);
+            {
+                if (isFirst && step.Clockwise)
+                {
+                    // Outer arc: curve outward into a flower petal crest
+                    var start = outline.Start;
+                    var end = step.To;
+                    var chordMid = new Point((start.X + end.X) / 2, (start.Y + end.Y) / 2);
+                    var chordHalf = Math.Sqrt(Math.Pow(end.X - chordMid.X, 2) + Math.Pow(end.Y - chordMid.Y, 2));
+
+                    // Bulge height proportional to petal chord
+                    var bulge = Math.Min(22.0, Math.Max(8.0, chordHalf * 0.28));
+                    var peak = DonutGeometry.PointAt(c, r2 + bulge, mid);
+                    var sagitta = Math.Sqrt(Math.Pow(peak.X - chordMid.X, 2) + Math.Pow(peak.Y - chordMid.Y, 2));
+
+                    if (sagitta > 1.0 && chordHalf > 1.0)
+                    {
+                        var petalRadius = (chordHalf * chordHalf + sagitta * sagitta) / (2 * sagitta);
+                        ctx.ArcTo(step.To, new Size(petalRadius, petalRadius), 0, false, SweepDirection.Clockwise);
+                    }
+                    else
+                    {
+                        ctx.ArcTo(step.To, new Size(step.ArcRadius, step.ArcRadius), 0, step.IsLargeArc, SweepDirection.Clockwise);
+                    }
+                }
+                else
+                {
+                    ctx.ArcTo(step.To, new Size(step.ArcRadius, step.ArcRadius), 0, step.IsLargeArc,
+                        step.Clockwise ? SweepDirection.Clockwise : SweepDirection.CounterClockwise);
+                }
+            }
             else
+            {
                 ctx.LineTo(step.To);
+            }
+            isFirst = false;
         }
         ctx.EndFigure(true);
         return geometry;
