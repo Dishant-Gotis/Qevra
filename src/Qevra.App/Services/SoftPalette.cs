@@ -12,10 +12,10 @@ namespace Qevra.App.Services;
 internal static class SoftPalette
 {
     /// <summary>The default accent colour (the first swatch of the Theme page).</summary>
-    public const string DefaultAccent = "#3B82F6";
+    public const string DefaultAccent = "#6546D7";
 
     /// <summary>The default corner radius (ThemeSettings.CornerRadius).</summary>
-    public const double DefaultCornerRadius = 16;
+    public const double DefaultCornerRadius = 12;
 
     /// <summary>Embedded Noto fonts (see build/fetch-fonts.ps1). Missing files fall back to system fonts.</summary>
     private const string Latin = "fonts:Qevra#Noto Sans";
@@ -45,6 +45,7 @@ internal static class SoftPalette
         "AccentSoftBrush",
         "AccentFaintBrush",
         "AccentStrongBrush",
+        "AccentHoverBrush",
         "OnAccentBrush",
         "SystemAccentColor",
         "SystemAccentColorLight1",
@@ -67,10 +68,11 @@ internal static class SoftPalette
     {
         res["AccentColor"] = accent;
         res["AccentBrush"] = new SolidColorBrush(accent);
-        res["AccentSoftBrush"] = new SolidColorBrush(accent, 0.18);
-        res["AccentFaintBrush"] = new SolidColorBrush(accent, 0.09);
-        res["AccentStrongBrush"] = new SolidColorBrush(Shade(accent, -0.25));
-        res["OnAccentBrush"] = new SolidColorBrush(Luminance(accent) > 0.6 ? Color.Parse("#1F1E1D") : Colors.White);
+        res["AccentSoftBrush"] = new SolidColorBrush(accent, 0.14);
+        res["AccentFaintBrush"] = new SolidColorBrush(accent, 0.06);
+        res["AccentStrongBrush"] = new SolidColorBrush(Shade(accent, -0.22));
+        res["AccentHoverBrush"] = new SolidColorBrush(Shade(accent, -0.10));
+        res["OnAccentBrush"] = new SolidColorBrush(Luminance(accent) > 0.6 ? Color.Parse("#171827") : Colors.White);
         res["SystemAccentColor"] = accent;
         res["SystemAccentColorLight1"] = Shade(accent, 0.15);
         res["SystemAccentColorLight2"] = Shade(accent, 0.30);

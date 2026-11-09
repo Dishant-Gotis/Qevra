@@ -21,7 +21,7 @@ public sealed class ThemeService(IPlatformServices platform)
 
     /// <summary>Accent swatches offered in the Theme page.</summary>
     public static readonly IReadOnlyList<string> Swatches =
-        ["#3B82F6", "#1D9E75", "#D85A30", "#378ADD", "#D4537E", "#BA7517", "#639922", "#5F5E5A"];
+        ["#6546D7", "#8065EB", "#23976B", "#C58A32", "#D34F5A", "#4779C7", "#D4537E", "#5F5E5A"];
 
     /// <summary>Curated theme preset with coordinated light and dark accent colours.</summary>
     public sealed record ThemePreset(string Key, string LightHex, string DarkHex)
@@ -34,13 +34,14 @@ public sealed class ThemeService(IPlatformServices platform)
     /// <summary>Curated pastel and monochrome presets offered in the Theme page.</summary>
     public static readonly IReadOnlyList<ThemePreset> Presets =
     [
-        new("monochrome", "#1F1E1D", "#F1EFE8"),
+        new("qevra", "#6546D7", "#8B72E8"),
+        new("monochrome", "#171827", "#F3F3F8"),
         new("lavender", "#6366F1", "#BCAEE5"),
+        new("mint", "#23976B", "#88D5B1"),
         new("peach", "#E07A70", "#F29B91"),
-        new("mint", "#529B7D", "#88D5B1"),
         new("rose", "#E86483", "#F79BB0"),
-        new("sky", "#5B8BE3", "#98B8F6"),
-        new("amber", "#CB852A", "#F0BA6A"),
+        new("sky", "#4779C7", "#98B8F6"),
+        new("amber", "#C58A32", "#F0BA6A"),
         new("sage", "#5A8E51", "#8DC983"),
     ];
 

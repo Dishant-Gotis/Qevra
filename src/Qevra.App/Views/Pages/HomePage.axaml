@@ -65,10 +65,10 @@
       <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14">
         
         <!-- App Logo Container -->
-        <Border Width="64" Height="64" CornerRadius="18" Background="{DynamicResource SurfaceAltBrush}"
+        <Border Width="56" Height="56" CornerRadius="16" Background="{DynamicResource SurfaceAltBrush}"
                 BorderBrush="{DynamicResource SubtleBorderBrush}" BorderThickness="1"
-                BoxShadow="0 4 16 0 #20000000" HorizontalAlignment="Center">
-          <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="42" Height="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                BoxShadow="{DynamicResource CardShadow}" HorizontalAlignment="Center">
+          <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="36" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
 
         <!-- Drop Instructions -->

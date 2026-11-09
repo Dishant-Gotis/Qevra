@@ -15,19 +15,14 @@
       <DockPanel Margin="{Binding NavPadding}">
         
         <!-- Top: Logo & Title -->
-        <StackPanel DockPanel.Dock="Top" Classes="navheader" Orientation="Horizontal" Spacing="12" Margin="0,0,0,12">
-          <Border Width="44" Height="44" CornerRadius="12" Background="{DynamicResource SurfaceAltBrush}"
+        <StackPanel DockPanel.Dock="Top" Classes="navheader" Orientation="Horizontal" Spacing="10" Margin="0,0,0,12">
+          <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceAltBrush}"
                   BorderBrush="{DynamicResource SubtleBorderBrush}" BorderThickness="1"
                   BoxShadow="{DynamicResource CardShadow}" VerticalAlignment="Center">
-            <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Image Source="avares://Qevra/Assets/Icons/qevra.png" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" />
           </Border>
           <StackPanel VerticalAlignment="Center" IsVisible="{Binding !IsNavCollapsed}">
-            <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-              <TextBlock Text="QEVRA" FontSize="18" FontWeight="Bold" LetterSpacing="0.6" Foreground="{DynamicResource TextPrimaryBrush}" />
-              <Border CornerRadius="4" Padding="5,1" Background="{DynamicResource AccentSoftBrush}" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="1" VerticalAlignment="Center">
-                <TextBlock Text="PRO" FontSize="9.5" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" LetterSpacing="0.5" />
-              </Border>
-            </StackPanel>
+            <TextBlock Text="Qevra" FontSize="16" FontWeight="SemiBold" LetterSpacing="-0.2" Foreground="{DynamicResource TextPrimaryBrush}" />
             <TextBlock Classes="caption" Text="{DynamicResource app.tagline}" />
           </StackPanel>
         </StackPanel>

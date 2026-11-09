@@ -233,7 +233,9 @@ public sealed class MaterialYouPalette
         }
         else
         {
-            var darkPrimary = l < 0.65 ? HslToRgb(h, Math.Min(sat * 0.75, 0.65), 0.75) : seed;
+            var darkPrimary = (l < 0.70 || (ContrastRatio(seed, Colors.White) < MinAccentContrast && ContrastRatio(seed, DarkModeDarkLabel) < MinAccentContrast))
+                ? HslToRgb(h, Math.Min(sat * 0.75, 0.65), 0.75)
+                : seed;
             var onPrimary = DarkModeOnAccent(darkPrimary);
             var primaryContainer = HslToRgb(h, Math.Min(sat * 0.5, 0.38), 0.26);
             var onPrimaryContainer = HslToRgb(h, Math.Min(sat * 0.7, 0.55), 0.88);

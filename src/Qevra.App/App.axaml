@@ -3,7 +3,7 @@
              xmlns:local="using:Qevra.App"
              x:Class="Qevra.App.App"
              Name="Qevra"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Light">
 
   <Application.DataTemplates>
     <!-- Maps FooPageViewModel → FooPage view (see ViewLocator.cs). -->

@@ -37,16 +37,16 @@ public sealed class ThemeSettings
 {
     public ThemeStyle Style { get; set; } = ThemeStyle.Soft;
 
-    public ThemeMode Mode { get; set; } = ThemeMode.System;
+    public ThemeMode Mode { get; set; } = ThemeMode.Light;
 
     /// <summary>Accent colour as <c>#RRGGBB</c>.</summary>
-    public string Accent { get; set; } = "#6366F1";
+    public string Accent { get; set; } = "#6546D7";
 
-    /// <summary>Active curated preset key (e.g. "mint", "peach") when a coordinated light/dark pair is used; null for custom choices.</summary>
+    /// <summary>Active curated preset key (e.g. "qevra", "mint") when a coordinated light/dark pair is used; null for custom choices.</summary>
     public string? PresetKey { get; set; }
 
     /// <summary>Base corner radius in pixels. Larger = "softer" UI.</summary>
-    public double CornerRadius { get; set; } = 16;
+    public double CornerRadius { get; set; } = 12;
 
     /// <summary>
     /// Disables animations (for low-end PCs or motion sensitivity).
