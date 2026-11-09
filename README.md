@@ -2,8 +2,14 @@
 
 > **A fast, offline, open-source file converter you use by dragging.**  
 > Hold a modifier key (`Ctrl` on Windows/Linux, `Option` on macOS), drag files, and drop them on a format slice in the radial menu that opens right at your cursor.
->
-> Source code: [https://github.com/Dishant-Gotis/Qevra](https://github.com/Dishant-Gotis/Qevra)
+
+<p align="center">
+  <img src="docs/media/qevra-preview.png" alt="Qevra - Drag, Convert, Organize Faster" width="100%" />
+</p>
+
+<p align="center">
+  <img src="docs/media/app.gif" alt="Qevra In Action Demo" width="90%" />
+</p>
 
 ---
 
