@@ -75,7 +75,7 @@ The application features an interactive slideshow that introduces features upon 
 | `pt-BR/*.webp` | 768 × 432 px | Animated WebP | Brazilian Portuguese localized slide variants (crop, formats, more, theme). |
 | `pt-PT/*.webp` | 768 × 432 px | Animated WebP | Portugal Portuguese localized slide variants (crop, formats, more, theme). |
 
-### Release 2.3.0 Slides (`src/Qevra.App/Assets/WhatsNew/2.3.0/`)
+### Release 0.2.0 Slides (`src/Qevra.App/Assets/WhatsNew/2.3.0/`)
 | Filename | Resolution | Format | Purpose |
 |---|---|---|---|
 | `annotate.webp` | 768 × 432 px | Animated WebP | Demonstrates vector annotation canvas (arrows, pens, highlighters). |

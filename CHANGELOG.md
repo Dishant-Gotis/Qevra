@@ -14,7 +14,7 @@ change, a language may repeat; a language without lines shows the English ones):
 - `recommended`: bug fixes. The card shows once per version.
 - `optional`: new features only. No card, the sidebar button only.
 
-## 2.3.0
+## 0.2.0
 
 <!-- update
 level: recommended

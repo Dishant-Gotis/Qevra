@@ -14,7 +14,7 @@
          parameters of a member is fine (CS1573). -->
     <NoWarn>$(NoWarn);CS1591;CS1573</NoWarn>
 
-    <Version>2.3.0</Version>
+    <Version>0.2.0</Version>
     <Product>Qevra</Product>
     <Authors>Qevra contributors</Authors>
     <Copyright>Copyright (c) Qevra contributors</Copyright>
